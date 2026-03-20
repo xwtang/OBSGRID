@@ -2,7 +2,7 @@
 
 include ../configure.oa
 
-.IGNORE:
+# .IGNORE:
 
 #	obsgrid
 
@@ -34,34 +34,34 @@ COMMON		=	header.common namelist.common
 
 #	plot_level
 
-SRC_OBS		=	plot_level.F
+# SRC_OBS		=	plot_level.F
 
-OBJS_OBS	=	$(SRC_OBS:.F=.o)
+# OBJS_OBS	=	$(SRC_OBS:.F=.o)
 
-MODULES_OBS 	=	module_header.o module_map_stuff.o module_ncarg.o module_read_station.o date_pack_module.o
+# MODULES_OBS 	=	module_header.o module_map_stuff.o module_ncarg.o module_read_station.o date_pack_module.o
 
 #	plot_soundings
 
-SRC_SND		=	plot_soundings.F
+# SRC_SND		=	plot_soundings.F
 
-OBJS_SND	=	$(SRC_SND:.F=.o)
+# OBJS_SND	=	$(SRC_SND:.F=.o)
 
-MODULES_SND 	=	module_mapinfo.o module_report.o module_skewt.o date_pack_module.o
+# MODULES_SND 	=	module_mapinfo.o module_report.o module_skewt.o date_pack_module.o
 
 
-all:			obsgrid.exe plot_level.exe plot_soundings.exe \
-			$(OBJS) $(MODULES) $(INTS) $(INCS) $(NML) $(COMMON) \
-			$(OBJS_OBS) $(MODULES_OBS) \
-			$(OBJS_SND) $(MODULES_SND) 
+all:			obsgrid.exe \
+			$(OBJS) $(MODULES) $(INTS) $(INCS) $(NML) $(COMMON) 
+			# $(OBJS_OBS) $(MODULES_OBS) \
+			# $(OBJS_SND) $(MODULES_SND) 
 
 obsgrid.exe: 		$(OBJS) $(MODULES) $(INTS) $(INCS) $(NML) $(COMMON) 
 			$(FC) -o $@ $(FCFLAGS) $(OBJS) $(MODULES) ${NETCDF_LIBS} ${NETCDF_INC} $(LDFLAGS)
 
-plot_level.exe: 	$(OBJS_OBS) $(MODULES_OBS) 
-			$(FC) -o $@ $(FCFLAGS) $(LDFLAGS) $(OBJS_OBS) $(MODULES_OBS) $(NCARG_LIBS) ${NETCDF_LIBS} ${NETCDF_INC} ${LOCAL_LIBS}
+# plot_level.exe: 	$(OBJS_OBS) $(MODULES_OBS) 
+# 			$(FC) -o $@ $(FCFLAGS) $(LDFLAGS) $(OBJS_OBS) $(MODULES_OBS) $(NCARG_LIBS) ${NETCDF_LIBS} ${NETCDF_INC} ${LOCAL_LIBS}
 
-plot_soundings.exe:	$(OBJS_SND) $(MODULES_SND) 
-			$(FC) -o $@ $(FCFLAGS) $(LDFLAGS) $(OBJS_SND) $(MODULES_SND) $(NCARG_LIBS) ${NETCDF_LIBS} ${NETCDF_INC} ${LOCAL_LIBS}
+# plot_soundings.exe:	$(OBJS_SND) $(MODULES_SND) 
+# 			$(FC) -o $@ $(FCFLAGS) $(LDFLAGS) $(OBJS_SND) $(MODULES_SND) $(NCARG_LIBS) ${NETCDF_LIBS} ${NETCDF_INC} ${LOCAL_LIBS}
 
 #	obsgrid files
 
@@ -130,18 +130,18 @@ yx2xy.o:
 
 #	plot_level files
 
-plot_level.o:		$(MODULES_OBS) 
-module_header.o:	
-module_map_stuff.o:	
-module_ncarg.o:		
-module_read_station.o:	
+# plot_level.o:		$(MODULES_OBS) 
+# module_header.o:	
+# module_map_stuff.o:	
+# module_ncarg.o:		
+# module_read_station.o:	
 
 #	plot_soundings files
 
-plot_soundings.o:	$(MODULES_SND) 
-module_mapinfo.o:	
-module_report.o:	
-module_skewt.o:		
+# plot_soundings.o:	$(MODULES_SND) 
+# module_mapinfo.o:	
+# module_report.o:	
+# module_skewt.o:		
 
 clean:
 			$(RM) *.o *.f core *.exe *.kmo ctmi* *.mod *_out_* output *.out

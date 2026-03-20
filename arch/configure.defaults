@@ -41,14 +41,14 @@ CPPFLAGS	=	-I. -C -P -DDEC -traditional
 ###########################################################
 #ARCH	PC Linux i486 i586 i686 x86_64, gfortran compiler	
 #
-FC		=	gfortran
-FFLAGS		=	-ffree-form -O -fconvert=big-endian -frecord-marker=4
-F77FLAGS	=	-ffixed-form -O -fconvert=big-endian -frecord-marker=4
+FC		    =	gfortran
+FFLAGS		=	-I${NETCDF_FORTRAN}/include -ffree-form -O -fconvert=big-endian -frecord-marker=4
+F77FLAGS	=	-I${NETCDF_FORTRAN}/include -ffixed-form -O -fconvert=big-endian -frecord-marker=4
 FNGFLAGS	=	$(FFLAGS)
-LDFLAGS		=	
-CC		=	gcc
+LDFLAGS		=	-L${NETCDF_FORTRAN}/lib -lnetcdff
+CC		    =	gcc
 CFLAGS		=	
-CPP		=	/usr/bin/cpp -C -P -traditional
+CPP	    	=	/usr/bin/cpp -C -P -traditional
 CPPFLAGS	=	
 
 ###########################################################
@@ -67,14 +67,14 @@ CPPFLAGS	=	-I. -C -P -DDEC -traditional
 ###########################################################
 #ARCH	PC Linux i486 i586 i686 x86_64, Intel compiler	
 #
-FC		=	ifort
-FFLAGS		=	-FR -convert big_endian
-F77FLAGS	=	-convert big_endian
+FC		    =	ifort
+FFLAGS		=	-I${NETCDF_FORTRAN}/include -FR -convert big_endian
+F77FLAGS	=	-I${NETCDF_FORTRAN}/include -convert big_endian
 FNGFLAGS	=	$(FFLAGS)
-LDFLAGS		=	
-CC		=	gcc
+LDFLAGS		=	-L${NETCDF_FORTRAN}/lib -lnetcdff -lnetcdf
+CC		    =	gcc
 CFLAGS		=	-w
-CPP		=	/lib/cpp 
+CPP		    =	/lib/cpp 
 CPPFLAGS	=	-I. -C -P -DDEC -traditional
 
 ###########################################################
@@ -159,19 +159,17 @@ CPPFLAGS	=	-I. -C -P -DDEC -traditional
 LOCAL_LIBS	= -L${PGI}/lib -lpgftnrtl -lpgc -L/usr/X11R6/lib -L/usr/local/g95/lib/gcc-lib/i386-apple-darwin8.11.1/4.0.3 -lXpm -lX11 -lXext -lf95
 
 ###########################################################
-#ARCH	Darwin - with g95 compiler	
+#ARCH	Darwin - with gfortran compiler	
 #
-FC		=	g95
-FFLAGS		=	-ffree-form -fendian=big
-F77FLAGS	=	-ffixed-form -fendian=big
-FNGFLAGS	=	$(FFLAGS) 
-LDFLAGS		=	-Wl,-stack_size,10000000,-stack_addr,0xc0000000
-CC		=	gcc
+FC		=	gfortran
+FFLAGS		=	-I$(NETCDF_FORTRAN)/include -ffree-form -cpp -O -fconvert=big-endian -frecord-marker=4
+F77FLAGS	=	-I$(NETCDF_FORTRAN)/include -ffixed-form - cpp -O -fconvert=big-endian -frecord-marker=4
+FNGFLAGS	=	$(FFLAGS)
+LDFLAGS		=	-L$(NETCDF_FORTRAN)/lib
+CC		    =	gcc
 CFLAGS		=	
-CPP		=	/usr/bin/cpp 
-CPPFLAGS	=	-C -P -traditional
-RANLIB		=	
-LOCAL_LIBS	=	-L/usr/X11R6/lib -lX11
+CPP		    =	
+CPPFLAGS	=	
 
 ###########################################################
 #ARCH	NULL
