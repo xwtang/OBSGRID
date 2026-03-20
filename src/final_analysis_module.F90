@@ -71,7 +71,7 @@ oa_type , oa_3D_type , oa_3D_option , rad_influence , oa_psfc )
    CHARACTER (LEN=50)                                :: cval
    INTEGER                                           :: ilen, itype, ival, idm, natt
    INTEGER, DIMENSION(6)                             :: ishape
-   REAL                                              :: rval
+   REAL                                              :: rval, r1d(1)
    REAL, DIMENSION(16)                               :: rval_corners, corner_lats, corner_lons
    CHARACTER (LEN=19), ALLOCATABLE, DIMENSION(:,:,:) :: text
    REAL, ALLOCATABLE, DIMENSION(:,:,:)               :: d3_data1, d3_data2
@@ -157,8 +157,8 @@ oa_type , oa_3D_type , oa_3D_option , rad_influence , oa_psfc )
                rcode = nf_get_att_real (met_ncid, NF_GLOBAL, cname, rval_corners)
                rcode = nf_put_att_real(oa_ncid, NF_GLOBAL, cname, itype, ilen, rval_corners)
             ELSE
-               rcode = nf_get_att_real (met_ncid, NF_GLOBAL, cname, rval)
-               rcode = nf_put_att_real(oa_ncid, NF_GLOBAL, cname, itype, ilen, rval)
+               rcode = nf_get_att_real (met_ncid, NF_GLOBAL, cname, r1d)
+               rcode = nf_put_att_real(oa_ncid, NF_GLOBAL, cname, itype, ilen, r1d)
             ENDIF 
           ENDIF 
    ENDDO     
@@ -481,6 +481,7 @@ integer :: i , j
 
 !BPR BEGIN
 integer :: varid
+real    :: r1d(1)
 !BPR END
 
    !  We need to keep track of where we are sticking the data for the FDDA option.
@@ -564,8 +565,8 @@ integer :: varid
                   rcode = nf_get_att_real (oa_met, NF_GLOBAL, cname, rval_corners)
                   rcode = nf_put_att_real(sfc_ncid, NF_GLOBAL, cname, itype, ilen, rval_corners)
                ELSE
-                  rcode = nf_get_att_real (oa_met, NF_GLOBAL, cname, rval)
-                  rcode = nf_put_att_real(sfc_ncid, NF_GLOBAL, cname, itype, ilen, rval)
+                  rcode = nf_get_att_real (oa_met, NF_GLOBAL, cname, r1d)
+                  rcode = nf_put_att_real(sfc_ncid, NF_GLOBAL, cname, itype, ilen, r1d)
                ENDIF 
              ENDIF 
       ENDDO loop_global_att    

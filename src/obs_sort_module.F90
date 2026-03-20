@@ -2792,7 +2792,9 @@ SUBROUTINE output_obs ( obs , unit , file_name , num_obs , out_opt, forinput, &
    CHARACTER ( LEN = 132 )                           :: met_file
    INTEGER                                           :: met_ncid
    INTEGER                                           :: idummy
+   INTEGER                                           :: i1d(1)
    REAL                                              :: rdummy
+   REAL                                              :: r1d(1)
 
    !BPR BEGIN
    TYPE ( meas_data )                                :: meas_earth_winds, meas_write
@@ -3547,17 +3549,28 @@ SUBROUTINE output_obs ( obs , unit , file_name , num_obs , out_opt, forinput, &
             start = 1
             count = 1
             start(1) = iout_nc
-            CALL check (nf_put_vara_real(ncid, 6,start,count,obs(i)%location%longitude))
-            CALL check (nf_put_vara_real(ncid, 7,start,count,obs(i)%location%latitude))
-            CALL check (nf_put_vara_real(ncid, 8,start,count,obs(i)%info%elevation))
-            CALL check (nf_put_vara_real(ncid, 9,start,count,obs(i)%ground%slp%data))
-            CALL check (nf_put_vara_int(ncid,10,start,count,obs(i)%ground%slp%qc))
-            CALL check (nf_put_vara_real(ncid,11,start,count,obs(i)%ground%ref_pres%data))
-            CALL check (nf_put_vara_int(ncid,12,start,count,obs(i)%ground%ref_pres%qc))
-            CALL check (nf_put_vara_int(ncid,13,start,count,true_num_obs))
-            CALL check (nf_put_vara_int(ncid, 14,start,count,int_sounding))
-            CALL check (nf_put_vara_int(ncid, 15,start,count,int_bogus))
-            CALL check (nf_put_vara_int(ncid, 16,start,count,int_discard))
+            r1d(1) = obs(i)%location%longitude
+            CALL check (nf_put_vara_real(ncid, 6, start, count, r1d))
+            r1d(1) = obs(i)%location%latitude
+            CALL check (nf_put_vara_real(ncid, 7, start, count, r1d))
+            r1d(1) = obs(i)%info%elevation
+            CALL check (nf_put_vara_real(ncid, 8, start, count, r1d))
+            r1d(1) = obs(i)%ground%slp%data
+            CALL check (nf_put_vara_real(ncid, 9, start, count, r1d))
+            i1d(1) = obs(i)%ground%slp%qc
+            CALL check (nf_put_vara_int(ncid, 10, start, count, i1d))
+            r1d(1) = obs(i)%ground%ref_pres%data
+            CALL check (nf_put_vara_real(ncid, 11, start, count, r1d))
+            i1d(1) = obs(i)%ground%ref_pres%qc
+            CALL check (nf_put_vara_int(ncid, 12, start, count, i1d))
+            i1d(1) = true_num_obs
+            CALL check (nf_put_vara_int(ncid, 13, start, count, i1d))
+            i1d(1) = int_sounding
+            CALL check (nf_put_vara_int(ncid, 14, start, count, i1d))
+            i1d(1) = int_bogus
+            CALL check (nf_put_vara_int(ncid, 15, start, count, i1d))
+            i1d(1) = int_discard
+            CALL check (nf_put_vara_int(ncid, 16, start, count, i1d))
  
             start = 1
             count = 1
