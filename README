@@ -46,3 +46,10 @@ Input files to this program:
 - Output from metgrid: met_em.d01.<date> 
 - Observations in the format ('little_r' format) described in the User's Guide.
 
+===================================================
+
+代码更新
+
+- netCDF-Fortran接口不兼容：修正了由于netCDF版本更新导致的编译错误
+- 更新makefile文件：直接使用gfortran进行前处理，避免cpp前处理生成C++注释导致的编译错误
+- 优化netCDF-Fortran的编译选项：由于很多机器上netCDF的C和Fortran库是分开安装的，因此增加了NETCDF_FORTRAN环境变量，用于指定Fortran库的位置
