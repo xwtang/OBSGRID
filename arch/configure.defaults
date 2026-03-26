@@ -165,7 +165,7 @@ FC		=	gfortran
 FFLAGS		=	-I$(NETCDF_FORTRAN)/include -ffree-form -cpp -O -fconvert=big-endian -frecord-marker=4
 F77FLAGS	=	-I$(NETCDF_FORTRAN)/include -ffixed-form - cpp -O -fconvert=big-endian -frecord-marker=4
 FNGFLAGS	=	$(FFLAGS)
-LDFLAGS		=	-L$(NETCDF_FORTRAN)/lib
+LDFLAGS		=	
 CC		    =	gcc
 CFLAGS		=	
 CPP		    =	

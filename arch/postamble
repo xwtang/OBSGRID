@@ -2,7 +2,7 @@
 #	Macros, these should be generic for all machines
 
 LN		=	ln -sf
-MAKE		=	make -i -r
+MAKE	=	make -i -r
 RM		= 	/bin/rm -f
 CP		= 	/bin/cp
 AR		=	ar ru

@@ -13,7 +13,7 @@
 
 .SUFFIXES: .F90 .f90 .F .f .c .o
 
-SHELL          	=       /bin/sh
+SHELL       =       /bin/sh
 
 # Listing of options that are usually independent of machine type.
 # When necessary, these are over-ridden by each architecture.
@@ -24,9 +24,9 @@ PERL		=	perl
 
 RANLIB		=	echo
 
-NETCDF_LIBS	=	-L${NETCDF}/lib -lnetcdf CONFIGURE_NETCDFF_LIB
+NETCDF_LIBS	=	-L${NETCDF}/lib -lnetcdf -L${NETCDF_FORTRAN}/lib -lnetcdff CONFIGURE_NETCDFF_LIB
 
-NETCDF_INC	=	-I${NETCDF}/include
+NETCDF_INC	=	-I${NETCDF}/include -I${NETCDF_FORTRAN}/include
 
 NCARG_LIBS	=	-L${NCARG_ROOT}/lib -lncarg -lncarg_gks -lncarg_c -lX11 -lm -lcairo
 
