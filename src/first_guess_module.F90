@@ -251,8 +251,7 @@ current_date_8 , current_time_6 , date_char , icount , print_analysis )
 
             ALLOCATE ( all_3d(loop3,tt)%array(jns_alloc,iew_alloc,kbu_alloc) ) 
             DO kp = 1,kbu_alloc
-               r1d(1) = all_3d(loop3,tt)%array(1,1,kp)
-               CALL yx2xy ( met_em_dum2(1,1,kp) , iew_alloc , jns_alloc ,  r1d(1))
+               CALL yx2xy( met_em_dum2(1,1,kp), iew_alloc, jns_alloc,  all_3d(loop3,tt)%array(:,:,kp))
             ENDDO
             all_3d(loop3,tt)%small_header = small_header
 
